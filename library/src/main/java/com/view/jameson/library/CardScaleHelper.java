@@ -15,7 +15,7 @@ public class CardScaleHelper {
     private RecyclerView mRecyclerView;
     private Context mContext;
 
-    private float mScale = 0.9f; // 两边视图scale
+    private float mScale = 0.7f; // 两边视图scale
     private int mPagePadding = 15; // 卡片的padding, 卡片间的距离等于2倍的mPagePadding
     private int mShowLeftCardWidth = 15;   // 左边卡片显示大小
 
@@ -58,6 +58,7 @@ public class CardScaleHelper {
         });
 
         initWidth();
+        //自动居中
         mLinearSnapHelper.attachToRecyclerView(mRecyclerView);
     }
 

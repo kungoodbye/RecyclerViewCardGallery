@@ -45,12 +45,12 @@ public class MainActivity extends Activity {
 
     private void init() {
         for (int i = 0; i < 10; i++) {
-            mList.add(R.drawable.pic4);
-            mList.add(R.drawable.pic5);
-            mList.add(R.drawable.pic6);
+            mList.add(R.drawable.a);
+            mList.add(R.drawable.a);
+            mList.add(R.drawable.a);
         }
 
-        mRecyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+        mRecyclerView = findViewById(R.id.recyclerView);
         final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         mRecyclerView.setLayoutManager(linearLayoutManager);
         mRecyclerView.setAdapter(new CardAdapter(mList));

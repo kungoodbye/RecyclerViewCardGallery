@@ -17,7 +17,7 @@ import jameson.io.library.util.ToastUtils;
  * Created by jameson on 8/30/16.
  */
 class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
-    private List<Integer> mList = new ArrayList<>();
+    private List<Integer> mList;
     private CardAdapterHelper mCardAdapterHelper = new CardAdapterHelper();
 
     public CardAdapter(List<Integer> mList) {
@@ -53,7 +53,7 @@ class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
 
         public ViewHolder(final View itemView) {
             super(itemView);
-            mImageView = (ImageView) itemView.findViewById(R.id.imageView);
+            mImageView = itemView.findViewById(R.id.imageView);
         }
 
     }
