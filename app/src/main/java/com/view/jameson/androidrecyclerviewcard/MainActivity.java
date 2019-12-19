@@ -56,14 +56,14 @@ public class MainActivity extends Activity {
         mRecyclerView.setAdapter(new CardAdapter(mList));
         // mRecyclerView绑定scale效果
         mCardScaleHelper = new CardScaleHelper();
-        mCardScaleHelper.setCurrentItemPos(2);
+//        mCardScaleHelper.setCurrentItemPos(2);
         mCardScaleHelper.attachToRecyclerView(mRecyclerView);
 
         initBlurBackground();
     }
 
     private void initBlurBackground() {
-        mBlurView = (ImageView) findViewById(R.id.blurView);
+        mBlurView = findViewById(R.id.blurView);
         mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {

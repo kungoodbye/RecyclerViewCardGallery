@@ -8,16 +8,14 @@ import android.view.View;
 import jameson.io.library.util.LogUtils;
 import jameson.io.library.util.ScreenUtil;
 
-/**
- * Created by jameson on 8/30/16.
- */
+
 public class CardScaleHelper {
     private RecyclerView mRecyclerView;
     private Context mContext;
 
-    private float mScale = 0.7f; // 两边视图scale
-    private int mPagePadding = 15; // 卡片的padding, 卡片间的距离等于2倍的mPagePadding
-    private int mShowLeftCardWidth = 15;   // 左边卡片显示大小
+    private float mScale = 0.5f; // 两边视图scale
+    private int mPagePadding = 25; // 卡片的padding, 卡片间的距离等于2倍的mPagePadding
+    private int mShowLeftCardWidth = 65;   // 左边卡片显示大小
 
     private int mCardWidth; // 卡片宽度
     private int mOnePageWidth; // 滑动一页的距离
@@ -30,7 +28,7 @@ public class CardScaleHelper {
 
     public void attachToRecyclerView(final RecyclerView mRecyclerView) {
         // 开启log会影响滑动体验, 调试时才开启
-        LogUtils.mLogEnable = false;
+        LogUtils.mLogEnable = true;
         this.mRecyclerView = mRecyclerView;
         mContext = mRecyclerView.getContext();
         mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
@@ -48,7 +46,7 @@ public class CardScaleHelper {
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
                 // dx>0则表示右滑, dx<0表示左滑, dy<0表示上滑, dy>0表示下滑
-                if(dx != 0){//去掉奇怪的内存疯涨问题
+                if (dx != 0) {//去掉奇怪的内存疯涨问题
                     mCurrentItemOffset += dx;
                     computeCurrentItemPos();
                     LogUtils.v(String.format("dx=%s, dy=%s, mScrolledX=%s", dx, dy, mCurrentItemOffset));
@@ -114,22 +112,36 @@ public class CardScaleHelper {
     private void onScrolledChangedCallback() {
         int offset = mCurrentItemOffset - mCurrentItemPos * mOnePageWidth;
         float percent = (float) Math.max(Math.abs(offset) * 1.0 / mOnePageWidth, 0.0001);
-
+//        if (percent < 1.0e-3) {
+//            percent = (float)1.0e-0;
+//            return;
+//        }
         LogUtils.d(String.format("offset=%s, percent=%s", offset, percent));
         View leftView = null;
         View currentView;
         View rightView = null;
+
+        View left2View = null;
+        View right2View = null;
+
         if (mCurrentItemPos > 0) {
             leftView = mRecyclerView.getLayoutManager().findViewByPosition(mCurrentItemPos - 1);
+            left2View = mRecyclerView.getLayoutManager().findViewByPosition(mCurrentItemPos - 2);
+
         }
         currentView = mRecyclerView.getLayoutManager().findViewByPosition(mCurrentItemPos);
+
+
         if (mCurrentItemPos < mRecyclerView.getAdapter().getItemCount() - 1) {
             rightView = mRecyclerView.getLayoutManager().findViewByPosition(mCurrentItemPos + 1);
+            right2View = mRecyclerView.getLayoutManager().findViewByPosition(mCurrentItemPos + 2);
         }
 
         if (leftView != null) {
             // y = (1 - mScale)x + mScale
             leftView.setScaleY((1 - mScale) * percent + mScale);
+            if (left2View != null)
+                left2View.setScaleY((1 - mScale) * percent + mScale);
         }
         if (currentView != null) {
             // y = (mScale - 1)x + 1
@@ -138,6 +150,10 @@ public class CardScaleHelper {
         if (rightView != null) {
             // y = (1 - mScale)x + mScale
             rightView.setScaleY((1 - mScale) * percent + mScale);
+            if (right2View != null) {
+                right2View.setScaleY(((1 - mScale) * percent + mScale)/2);
+                System.out.println("测试"+((1 - mScale) * percent + mScale));
+            }
         }
     }
 
