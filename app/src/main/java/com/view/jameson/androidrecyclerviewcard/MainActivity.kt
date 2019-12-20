@@ -15,12 +15,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.view.jameson.androidrecyclerviewcard.util.BlurBitmapUtils
 import com.view.jameson.androidrecyclerviewcard.util.ViewSwitchUtils
 import com.view.jameson.library.CardScaleHelper
+import kotlinx.android.synthetic.main.activity_main.*
 
 import java.util.ArrayList
 
 class MainActivity : Activity() {
 
-    private var mRecyclerView: RecyclerView? = null
     private var mBlurView: ImageView? = null
     private val mList = ArrayList<Int>()
     private var mCardScaleHelper: CardScaleHelper? = null
@@ -47,9 +47,8 @@ class MainActivity : Activity() {
             mList.add(R.drawable.a)
         }
 
-        mRecyclerView = findViewById(R.id.recyclerView)
         val linearLayoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-        mRecyclerView!!.layoutManager = linearLayoutManager
+        recyclerView.layoutManager = linearLayoutManager
 
         //图片间距(dp)
         val mPagePadding = 25
@@ -57,21 +56,21 @@ class MainActivity : Activity() {
         val mShowLeftCardWidth = 65
         //缩放倍率
         val mScale = 0.7f
-        mRecyclerView!!.adapter = CardAdapter(mList, mPagePadding, mShowLeftCardWidth)
+        recyclerView.adapter = CardAdapter(mList, mPagePadding, mShowLeftCardWidth)
         mCardScaleHelper = CardScaleHelper()
         mCardScaleHelper!!.setPagePadding(mPagePadding)
         mCardScaleHelper!!.setShowLeftCardWidth(mShowLeftCardWidth)
 
         mCardScaleHelper!!.setScale(mScale)
         mCardScaleHelper!!.currentItemPos = 5
-        mCardScaleHelper!!.attachToRecyclerView(mRecyclerView!!)
+        mCardScaleHelper!!.attachToRecyclerView(recyclerView)
 
         initBlurBackground()
     }
 
     private fun initBlurBackground() {
         mBlurView = findViewById(R.id.blurView)
-        mRecyclerView!!.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+        recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
                 if (newState == RecyclerView.SCROLL_STATE_IDLE) {
