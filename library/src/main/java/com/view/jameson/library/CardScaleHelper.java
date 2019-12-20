@@ -13,7 +13,7 @@ public class CardScaleHelper {
     private RecyclerView mRecyclerView;
     private Context mContext;
 
-    private float mScale = 0.5f; // 两边视图scale
+    private float mScale = 0.7f; // 两边视图scale
     private int mPagePadding = 25; // 卡片的padding, 卡片间的距离等于2倍的mPagePadding
     private int mShowLeftCardWidth = 65;   // 左边卡片显示大小
 
@@ -76,6 +76,11 @@ public class CardScaleHelper {
         });
     }
 
+    /**
+     * 移动到默认位置
+     *
+     * @param currentItemPos
+     */
     public void setCurrentItemPos(int currentItemPos) {
         this.mCurrentItemPos = currentItemPos;
     }
@@ -136,12 +141,13 @@ public class CardScaleHelper {
             rightView = mRecyclerView.getLayoutManager().findViewByPosition(mCurrentItemPos + 1);
             right2View = mRecyclerView.getLayoutManager().findViewByPosition(mCurrentItemPos + 2);
         }
-
+        float mScaleY = (1 - mScale) * percent + mScale;
         if (leftView != null) {
             // y = (1 - mScale)x + mScale
-            leftView.setScaleY((1 - mScale) * percent + mScale);
-            if (left2View != null)
-                left2View.setScaleY((1 - mScale) * percent + mScale);
+            leftView.setScaleY(mScaleY);
+            if (left2View != null) {
+                left2View.setScaleY(mScaleY / 2 + mScale - 0.5f);
+            }
         }
         if (currentView != null) {
             // y = (mScale - 1)x + 1
@@ -149,10 +155,9 @@ public class CardScaleHelper {
         }
         if (rightView != null) {
             // y = (1 - mScale)x + mScale
-            rightView.setScaleY((1 - mScale) * percent + mScale);
+            rightView.setScaleY(mScaleY);
             if (right2View != null) {
-                right2View.setScaleY(((1 - mScale) * percent + mScale)/2);
-                System.out.println("测试"+((1 - mScale) * percent + mScale));
+                right2View.setScaleY(mScaleY / 2 + mScale - 0.5f);
             }
         }
     }

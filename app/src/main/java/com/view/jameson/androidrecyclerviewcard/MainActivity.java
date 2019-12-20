@@ -53,10 +53,20 @@ public class MainActivity extends Activity {
         mRecyclerView = findViewById(R.id.recyclerView);
         final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         mRecyclerView.setLayoutManager(linearLayoutManager);
-        mRecyclerView.setAdapter(new CardAdapter(mList));
-        // mRecyclerView绑定scale效果
+
+        //图片间距(dp)
+        int mPagePadding = 25;
+        //左右侧显示宽度(dp)
+        int mShowLeftCardWidth = 65;
+        //缩放倍率
+        float mScale = 0.7f;
+        mRecyclerView.setAdapter(new CardAdapter(mList, mPagePadding, mShowLeftCardWidth));
         mCardScaleHelper = new CardScaleHelper();
-//        mCardScaleHelper.setCurrentItemPos(2);
+        mCardScaleHelper.setPagePadding(mPagePadding);
+        mCardScaleHelper.setShowLeftCardWidth(mShowLeftCardWidth);
+
+        mCardScaleHelper.setScale(mScale);
+        mCardScaleHelper.setCurrentItemPos(5);
         mCardScaleHelper.attachToRecyclerView(mRecyclerView);
 
         initBlurBackground();

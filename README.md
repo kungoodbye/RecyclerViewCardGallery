@@ -7,7 +7,7 @@ RecyclerView实现Card Gallery效果，替代ViewPager方案。能够快速滑�
 录制效果有点渣，见谅~ 可下载[apk](https://github.com/huazhiyuan2008/RecyclerViewCardGallery/blob/master/art/app-debug.apk?raw=true)自己玩
 
 ## Usage
-      修改参数即可使用  
+      修改参数即可使用
       //图片间距(dp)
       int mPagePadding = 25;
       //左右侧显示宽度(dp)

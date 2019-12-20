@@ -18,10 +18,14 @@ import jameson.io.library.util.ToastUtils;
  */
 class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
     private List<Integer> mList;
+
+
     private CardAdapterHelper mCardAdapterHelper = new CardAdapterHelper();
 
-    public CardAdapter(List<Integer> mList) {
+    CardAdapter(List<Integer> mList, int mPagePadding, int mShowLeftCardWidth) {
         this.mList = mList;
+        mCardAdapterHelper.setPagePadding(mPagePadding);
+        mCardAdapterHelper.setShowLeftCardWidth(mShowLeftCardWidth);
     }
 
     @Override

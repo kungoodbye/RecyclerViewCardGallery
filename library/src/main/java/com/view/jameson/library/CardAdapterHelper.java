@@ -19,7 +19,7 @@ public class CardAdapterHelper {
         RecyclerView.LayoutParams lp = (RecyclerView.LayoutParams) itemView.getLayoutParams();
         lp.width = parent.getWidth() - ScreenUtil.dip2px(itemView.getContext(), 2 * (mPagePadding + mShowLeftCardWidth));
 //        lp.width = ScreenUtil.dip2px(itemView.getContext(), 140);
-        System.out.println("测试，宽度"+lp.width+"/父类宽度"+parent.getWidth());
+//        System.out.println("测试，宽度"+lp.width+"/父类宽度"+parent.getWidth());
         itemView.setLayoutParams(lp);
     }
 
@@ -35,7 +35,7 @@ public class CardAdapterHelper {
 //        int rightMarin = position == itemCount - 1 ? padding + ScreenUtil.dip2px(itemView.getContext(), 20) : 0;
 //        int rightMarin = ScreenUtil.dip2px(itemView.getContext(), 20);
 
-        System.out.println("测试左右边缘"+leftMarin +"/"+rightMarin);
+//        System.out.println("测试左右边缘"+leftMarin +"/"+rightMarin);
 
         setViewMargin(itemView, leftMarin, 0, rightMarin, 0);
     }
