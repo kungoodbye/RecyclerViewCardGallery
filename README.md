@@ -1,7 +1,7 @@
 # RecyclerViewCardGallery
 
 RecyclerView实现Card Gallery效果，替代ViewPager方案。能够快速滑动并最终定位到居中位置
-![RecyclerViewCardGallery.gif](https://https://github.com/kungoodbye/RecyclerViewCardGallery/blob/master/art/RecyclerViewCardGallery.gif)
+![RecyclerViewCardGallery.gif](https://github.com/kungoodbye/RecyclerViewCardGallery/blob/master/art/RecyclerViewCardGallery.gif)
 
 
 
@@ -25,6 +25,9 @@ mRecyclerView.setLayoutManager(linearLayoutManager);
 mRecyclerView.setAdapter(new CardAdapter());
 // mRecyclerView绑定scale效果
 new CardScaleHelper().attachToRecyclerView(mRecyclerView);
+mCardScaleHelper.setPagePadding(mPagePadding);
+mCardScaleHelper.setShowLeftCardWidth(mShowLeftCardWidth);
+mCardScaleHelper.setScale(mScale);
 ```
 
 在adapter相应的位置调用
